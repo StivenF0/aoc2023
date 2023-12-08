@@ -1,6 +1,6 @@
 # Get lines from the input file
 lines = []
-with open("../../input.txt", "r") as file:
+with open("../input.txt", "r") as file:
     lines = [line.strip("\n") for line in file.readlines()]
 
 # Defining a list of possible numbers
