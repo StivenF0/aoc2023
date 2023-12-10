@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Day2p2 {
+  // Get cubes in a game string
   static int getCubes(String cubeStr) {
     String trimmedStr = cubeStr.trim();
     String[] stringParts = trimmedStr.split(" ");
@@ -14,11 +15,7 @@ public class Day2p2 {
   }
 
   public static void main(String[] args) {
-    final Map<String, Integer> MAX = new HashMap<>();
-    MAX.put("red", 12);
-    MAX.put("green", 13);
-    MAX.put("blue", 14);
-
+    // Reading the input file
     ArrayList<String> lines = new ArrayList<>();
     try {
       File inputFile = new File("../input.txt");
@@ -32,12 +29,15 @@ public class Day2p2 {
       e.printStackTrace();
     }
 
+    // Getting all the rounds maximum values in each game.
     ArrayList<Map<String, Integer>> games = new ArrayList<>();
     for (String line : lines) {
       String[] gameRounds = line.split(":")[1].split(";");
       int redMax = 0;
       int greenMax = 0;
       int blueMax = 0;
+
+      // Getting max values of cubes on each set of an round.
       for (String gameRound : gameRounds) {
         String[] cubes = gameRound.split(",");
         for (String cubeRound : cubes) {
@@ -53,6 +53,7 @@ public class Day2p2 {
         }
       }
 
+      // Appending to the games list.
       Map<String, Integer> game = new HashMap<>();
       game.put("red", redMax);
       game.put("green", greenMax);
@@ -61,6 +62,7 @@ public class Day2p2 {
       games.add(game);
     }
 
+    // Doing the operation of power for each game
     int powerSum = 0;
     for (Map<String, Integer> game : games) {
       powerSum += game.get("red") * game.get("green") * game.get("blue");

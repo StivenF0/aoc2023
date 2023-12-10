@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Day2p1 {
+  // Get cubes in a game string
   static int getCubes(String cubeStr) {
     String trimmedStr = cubeStr.trim();
     String[] stringParts = trimmedStr.split(" ");
@@ -14,11 +15,13 @@ public class Day2p1 {
   }
 
   public static void main(String[] args) {
+    // Defining max values for cubes in a bag
     final Map<String, Integer> MAX = new HashMap<>();
     MAX.put("red", 12);
     MAX.put("green", 13);
     MAX.put("blue", 14);
 
+    // Reading the input file
     ArrayList<String> lines = new ArrayList<>();
     try {
       File inputFile = new File("../placeholder.txt");
@@ -32,6 +35,7 @@ public class Day2p1 {
       e.printStackTrace();
     }
 
+    // Getting all the rounds maximum values in each game.
     ArrayList<Map<String, Integer>> games = new ArrayList<>();
     for (String line : lines) {
       int id = Integer.parseInt(line.split(":")[0].split(" ")[1]);
@@ -39,6 +43,8 @@ public class Day2p1 {
       int redMax = 0;
       int greenMax = 0;
       int blueMax = 0;
+
+      // Getting max values of cubes on each set of an round.
       for (String gameRound : gameRounds) {
         String[] cubes = gameRound.split(",");
         for (String cubeRound : cubes) {
@@ -54,6 +60,7 @@ public class Day2p1 {
         }
       }
 
+      // Appending to the games list.
       Map<String, Integer> game = new HashMap<>();
       game.put("id", id);
       game.put("red", redMax);
@@ -63,6 +70,7 @@ public class Day2p1 {
       games.add(game);
     }
 
+    // Doing the sum of the ids of each valid game
     int gamesPossible = 0;
     for (Map<String, Integer> game : games) {
       if (
