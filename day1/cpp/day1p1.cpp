@@ -17,7 +17,7 @@ int concatConvert(char c1, char c2) {
 
 int main() {
   std::vector<std::string> lines;
-  std::fstream input("../../input.txt");
+  std::fstream input("../input.txt");
   std::string line;
   while(std::getline(input, line)) {
     lines.push_back(line);

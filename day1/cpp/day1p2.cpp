@@ -22,7 +22,7 @@ void removeEmptyString(std::vector<std::string> stringVector) {
 
 int main() {
   std::vector<std::string> lines;
-  std::fstream input("../../input.txt");
+  std::fstream input("../input.txt");
   std::string line;
   while(std::getline(input, line)) {
     lines.push_back(line);
