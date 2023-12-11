@@ -35,8 +35,7 @@ coordsArray_t getAllSymbolCoords(std::vector<std::string> &matrix) {
   coordsArray_t allCoords;
   for (int i = 0; i < matrix.size(); i++) {
     for (int j = 0; j < matrix[i].length(); j++) {
-      if (matrix[i][j] == '.' || isdigit(matrix[i][j]))
-        continue;
+      if (matrix[i][j] != '*') continue;
       allCoords.push_back({j, i});
     }
   }
@@ -91,8 +90,13 @@ int main() {
   coordsArray_t coords = getAllSymbolCoords(lines);
   numberArray_t nums = getAllNumbers(lines);
 
+  // Defining a vector that will be used later
+  std::vector<int> gearRatioNums;
+
   // Mapping through each coordinate to find his matching numbers
   for (coords_t coord : coords) {
+    int firstNum = 0;
+    int secondNum = 0;
     for (number_t& num : nums) {
       if (
           // Verify up
@@ -114,16 +118,23 @@ int main() {
               std::stoi(num["y"]) == coord[1] &&
               std::stoi(num["x"]) == coord[0] + 1))
       {
-        num["found"] = "1";
+        if (!firstNum) {
+          firstNum = std::stoi(num["value"]);
+          continue;
+        }
+        secondNum = std::stoi(num["value"]);
       }
     }
+
+    // Pushing the essential nums to the vector
+    if (!secondNum) continue;
+    gearRatioNums.push_back(firstNum * secondNum);
   }
 
   // Summing the values
   int sum = 0;
-  for (number_t num : nums) {
-    if (num["found"].empty()) continue;
-    sum += std::stoi(num["value"]);
+  for (int num : gearRatioNums) {
+    sum += num;
   }
 
   // Printing the output
