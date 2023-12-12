@@ -35,6 +35,7 @@ public class Day4p1 {
         if (win.isEmpty()) continue;
         for (String val : valuesArr) {
           if (val.isEmpty()) continue;
+          System.out.println(val);
           correct += Integer.parseInt(win) == Integer.parseInt(val) ? 1 : 0;
         }
       }
